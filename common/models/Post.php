@@ -157,9 +157,9 @@ class Post extends ActiveRecord
 
     public function getPreview()
     {
-        $words = 60;
+        $words = 30;
 
-        if(StringHelper::countWords($this->content) > 60)
+        if(StringHelper::countWords($this->content) > 30)
             return StringHelper::truncateWords($this->content, $words);
         else
             return $this->content;

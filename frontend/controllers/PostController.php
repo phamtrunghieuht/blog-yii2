@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use yii\web\Controller;
 use common\models\Post;
+use yii\data\Pagination;
 class PostController extends Controller
 {
     /**
@@ -42,10 +43,13 @@ class PostController extends Controller
         $condition = [
             'status' => Post::STATUS_ACTIVE,            
         ];
-        $posts = Post::find()->where($condition)->orderBy('created_at DESC')->limit(3)->all();
-
+        $postsQuery = Post::find()->where($condition)->orderBy('created_at DESC');
+        $countQuery = clone $postsQuery;
+        $pages = new Pagination(['totalCount' => $countQuery->count(),'pageSize' => 2]);
+        $models = $postsQuery->offset($pages->offset)->limit($pages->limit)->all();
         return $this->render('blog', [
-            'posts' => $posts,            
+            'posts' => $models,
+            'pages' => $pages,
         ]);
     }
 
