@@ -15,14 +15,14 @@ foreach ($posts as $key => $post) {
         <div class="post-meta d-flex justify-content-between">
         <div class="date meta-last"><?= $post->created_at ?></div>
         <div class="category"><a href="#"><?= $post->category->title ?></a></div>
-        </div><a href="post.html">
+        </div><a href="<?= Url::to(['post/view','id'=>$post->id,'slug'=>$post->slug]) ?>">
         <h3 class="h4"><?= $post->title ?></h3></a>
         <p class="text-muted"><?= $post->getPreview() ?></p>
         <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
             <div class="avatar"><img src="img/avatar-3.jpg" alt="..." class="img-fluid"></div>
             <div class="title"><span><?= $post->author->username ?></span></div></a>
-        <div class="date"><i class="icon-clock"></i> 2 months ago</div>
-        <div class="comments meta-last"><i class="icon-comment"></i>12</div>
+        <!--<div class="date"><i class="icon-clock"></i> 2 months ago</div>
+        <div class="comments meta-last"><i class="icon-comment"></i>12</div>-->
         </footer>
     </div>
 </div>

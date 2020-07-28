@@ -164,4 +164,13 @@ class Post extends ActiveRecord
         else
             return $this->content;
     }
+
+    public function getLastestPost()
+    {
+        $condition = [
+            'status' => Post::STATUS_ACTIVE,            
+        ];
+        $posts = Post::find()->where($condition)->orderBy('created_at DESC')->limit(3)->all();
+        return $posts;
+    }
 }
